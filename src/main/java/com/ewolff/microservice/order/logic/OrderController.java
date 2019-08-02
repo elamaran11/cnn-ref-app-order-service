@@ -1,5 +1,6 @@
 package com.ewolff.microservice.order.logic;
 
+import java.math.BigInteger;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,7 @@ class OrderController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ModelAndView get(@PathVariable("id") String id) {
+	public ModelAndView get(@PathVariable("id") BigInteger id) {
 		return new ModelAndView("order", "order", orderRepository.findById(id).get());
 	}
 
@@ -75,7 +76,7 @@ class OrderController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ModelAndView post(@PathVariable("id") String id) {
+	public ModelAndView post(@PathVariable("id") BigInteger id) {
 		orderRepository.deleteById(id);
 
 		return new ModelAndView("success");

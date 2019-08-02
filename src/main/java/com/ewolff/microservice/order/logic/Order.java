@@ -1,5 +1,6 @@
 package com.ewolff.microservice.order.logic;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ class Order {
 
 	@Id
 	@GeneratedValue
-	private String id;
+	private BigInteger id;
 
 	private long customerId;
 
@@ -34,11 +35,11 @@ class Order {
 		orderLine = new ArrayList<OrderLine>();
 	}
 
-	public void setId(String id) {
+	public void setId(BigInteger id) {
 		this.id = id;
 	}
 
-	public String getId() {
+	public BigInteger getId() {
 		return id;
 	}
 
