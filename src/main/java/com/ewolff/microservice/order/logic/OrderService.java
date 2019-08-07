@@ -34,7 +34,7 @@ class OrderService {
 		return orderRepository.save(order);
 	}
 
-	public double getPrice(BigInteger orderId) {
+	public double getPrice(String orderId) {
 		return orderRepository.findById(orderId).get().totalPrice(itemClient);
 	}
 

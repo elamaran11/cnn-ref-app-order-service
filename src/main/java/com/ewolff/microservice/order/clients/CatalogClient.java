@@ -53,7 +53,7 @@ public class CatalogClient {
 		return new RestTemplate(Collections.<HttpMessageConverter<?>>singletonList(converter));
 	}
 
-	public double price(long itemId) {
+	public double price(String itemId) {
 		return getOne(itemId).getPrice();
 	}
 
@@ -68,7 +68,7 @@ public class CatalogClient {
 		return url;
 	}
 
-	public Item getOne(long itemId) {
+	public Item getOne(String itemId) {
 		return restTemplate.getForObject(catalogURL() + itemId, Item.class);
 	}
 }

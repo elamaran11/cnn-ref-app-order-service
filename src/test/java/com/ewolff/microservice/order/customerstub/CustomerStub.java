@@ -20,19 +20,19 @@ import com.ewolff.microservice.order.clients.Customer;
 public class CustomerStub {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Customer> getById(@PathVariable("id") long id) {
+	public ResponseEntity<Customer> getById(@PathVariable("id") String id) {
 
-		if (id != 42) {
+		if (id != "42") {
 			return new ResponseEntity<Customer>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Customer>(new Customer(42, "Eberhard",
+		return new ResponseEntity<Customer>(new Customer("42", "Eberhard",
 				"Wolff", "eberhard.wolff@gmail.com", "Unter den Linden",
 				"Berlin"), HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public PagedResources<Customer> getAll() {
-		return new PagedResources<Customer>(Arrays.asList(new Customer(42,
+		return new PagedResources<Customer>(Arrays.asList(new Customer("42",
 				"Eberhard", "Wolff", "eberhard.wolff@gmail.com",
 				"Unter den Linden", "Berlin")), new PageMetadata(1, 0, 1));
 	}

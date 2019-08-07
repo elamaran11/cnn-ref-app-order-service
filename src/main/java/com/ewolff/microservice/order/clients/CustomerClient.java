@@ -43,7 +43,7 @@ public class CustomerClient {
 		this.customerServicePort = customerServicePort;
 	}
 
-	public boolean isValidCustomerId(long customerId) {
+	public boolean isValidCustomerId(String customerId) {
 		RestTemplate restTemplate = new RestTemplate();
 		try {
 			ResponseEntity<String> entity = restTemplate.getForEntity(customerURL() + customerId, String.class);
@@ -81,7 +81,7 @@ public class CustomerClient {
 
 	}
 
-	public Customer getOne(long customerId) {
+	public Customer getOne(String customerId) {
 		return restTemplate.getForObject(customerURL() + customerId, Customer.class);
 	}
 }

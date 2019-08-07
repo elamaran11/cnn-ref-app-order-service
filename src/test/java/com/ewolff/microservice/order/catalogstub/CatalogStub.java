@@ -20,18 +20,18 @@ import com.ewolff.microservice.order.clients.Item;
 public class CatalogStub {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Item> getById(@PathVariable("id") long id) {
-		if (id != 1) {
+	public ResponseEntity<Item> getById(@PathVariable("id") String id) {
+		if (id != "1") {
 			return new ResponseEntity<Item>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Item>(new Item(1, "iPod", 42.0),
+		return new ResponseEntity<Item>(new Item("1", "iPod", 42.0),
 				HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public PagedResources<Item> getAll() {
 		return new PagedResources<Item>(
-				Arrays.asList(new Item(1, "iPod", 42.0)), new PageMetadata(1,
+				Arrays.asList(new Item("1", "iPod", 42.0)), new PageMetadata(1,
 						0, 1));
 	}
 

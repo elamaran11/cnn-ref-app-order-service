@@ -65,7 +65,7 @@ class OrderController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ModelAndView get(@PathVariable("id") BigInteger id) {
+	public ModelAndView get(@PathVariable("id") String id) {
 		return new ModelAndView("order", "order", orderRepository.findById(id).get());
 	}
 
@@ -76,7 +76,7 @@ class OrderController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ModelAndView post(@PathVariable("id") BigInteger id) {
+	public ModelAndView post(@PathVariable("id") String id) {
 		orderRepository.deleteById(id);
 
 		return new ModelAndView("success");
