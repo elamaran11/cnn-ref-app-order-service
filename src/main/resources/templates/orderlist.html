@@ -11,9 +11,9 @@
 		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
-					<td>ID</td>
 					<td>Customer</td>
 					<td>Total Price</td>
+					<td></td>
 					<td></td>
 				</tr>
 			</thead>
@@ -22,12 +22,16 @@
 					<td colspan="4">No orders</td>
 				</tr>
 				<tr th:each="order : ${orders}">
-					<td><a href="order/1" th:href="${order.id}"
-						th:text="${order.id}">1</a></td>
 					<td
 						th:text="${@customerClient.getOne(order.customerId).firstname} + ' ' + ${@customerClient.getOne(order.customerId).name}">Firstname
-						Name</td>
+						Name
+					</td>
 					<td th:text="${order.totalPrice(@catalogClient)}">42.0</td>
+					
+					<td><a href="order/1" th:href="${order.id}"
+						th:text="Edit">1</a>
+					</td>
+					
 					<td><form th:action="'/order/'+${order.id}" th:method="delete">
 							<input type="submit" value="delete" class="btn btn-link" />
 						</form></td>
