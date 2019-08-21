@@ -1,20 +1,19 @@
 package com.ewolff.microservice.order.logic;
 
-import java.math.BigInteger;
-import java.util.Collection;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.ewolff.microservice.order.clients.CatalogClient;
 import com.ewolff.microservice.order.clients.Customer;
 import com.ewolff.microservice.order.clients.CustomerClient;
 import com.ewolff.microservice.order.clients.Item;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Collection;
 
 @Controller
 class OrderController {
@@ -27,7 +26,7 @@ class OrderController {
 	private CatalogClient catalogClient;
 
 	@Autowired
-	private OrderController(OrderService orderService,
+	public OrderController(OrderService orderService,
 			OrderRepository orderRepository, CustomerClient customerClient,
 			CatalogClient catalogClient) {
 		super();
@@ -59,7 +58,7 @@ class OrderController {
 	}
 
 	@RequestMapping(value = "/line", method = RequestMethod.POST)
-	public ModelAndView addLine(Order order) {
+	public ModelAndView addLine(@RequestBody Order order) {
 		order.addLine(0, catalogClient.findAll().iterator().next().getItemId());
 		return new ModelAndView("orderForm", "order", order);
 	}

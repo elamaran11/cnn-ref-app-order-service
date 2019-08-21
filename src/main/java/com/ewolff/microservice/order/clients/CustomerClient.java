@@ -44,7 +44,6 @@ public class CustomerClient {
 	}
 
 	public boolean isValidCustomerId(String customerId) {
-		RestTemplate restTemplate = new RestTemplate();
 		try {
 			ResponseEntity<String> entity = restTemplate.getForEntity(customerURL() + customerId, String.class);
 			return entity.getStatusCode().is2xxSuccessful();
@@ -69,7 +68,7 @@ public class CustomerClient {
 	}
 
 	public Collection<Customer> findAll() {
-		PagedResources<Customer> pagedResources = getRestTemplate().getForObject(customerURL(),
+		PagedResources<Customer> pagedResources = restTemplate.getForObject(customerURL(),
 				CustomerPagedResources.class);
 		return pagedResources.getContent();
 	}

@@ -16,7 +16,7 @@ class OrderService {
 	private CatalogClient itemClient;
 
 	@Autowired
-	private OrderService(OrderRepository orderRepository,
+	public OrderService(OrderRepository orderRepository,
 			CustomerClient customerClient, CatalogClient itemClient) {
 		super();
 		this.orderRepository = orderRepository;
