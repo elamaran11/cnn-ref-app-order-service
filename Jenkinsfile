@@ -15,7 +15,7 @@ pipeline {
       steps {
         checkout scm
         container('maven') {
-          sh 'unset MAVEN_CONFIG && env && ./mvnw clean package -Dmaven.test.skip=true'
+          sh 'unset MAVEN_CONFIG && env && ./mvnw clean package'
         }
       }
     }
