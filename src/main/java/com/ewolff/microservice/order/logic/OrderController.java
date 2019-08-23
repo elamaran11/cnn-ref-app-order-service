@@ -5,6 +5,8 @@ import com.ewolff.microservice.order.clients.Customer;
 import com.ewolff.microservice.order.clients.CustomerClient;
 import com.ewolff.microservice.order.clients.Item;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.MediaTypes;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,7 +59,7 @@ class OrderController {
 		return new ModelAndView("orderForm", "order", new Order());
 	}
 
-	@RequestMapping(value = "/line", method = RequestMethod.POST)
+	@RequestMapping(value = "/line", method = RequestMethod.POST,consumes= MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ModelAndView addLine(@RequestBody Order order) {
 		order.addLine(0, catalogClient.findAll().iterator().next().getItemId());
 		return new ModelAndView("orderForm", "order", order);
