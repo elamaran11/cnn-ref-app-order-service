@@ -59,8 +59,8 @@ class OrderController {
 		return new ModelAndView("orderForm", "order", new Order());
 	}
 
-	@RequestMapping(value = "/line", method = RequestMethod.POST,consumes= MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ModelAndView addLine(@RequestBody Order order) {
+	@RequestMapping(value = "/line", method = RequestMethod.POST)
+	public ModelAndView addLine(Order order) {
 		order.addLine(0, catalogClient.findAll().iterator().next().getItemId());
 		return new ModelAndView("orderForm", "order", order);
 	}
