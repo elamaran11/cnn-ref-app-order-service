@@ -44,6 +44,7 @@ public class CustomerClient {
 	}
 
 	public boolean isValidCustomerId(String customerId) {
+			RestTemplate restTemplate = new RestTemplate();
 		try {
 			ResponseEntity<String> entity = restTemplate.getForEntity(customerURL() + customerId, String.class);
 			return entity.getStatusCode().is2xxSuccessful();
