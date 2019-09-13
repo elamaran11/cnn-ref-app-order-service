@@ -20,12 +20,12 @@ public class Customer extends ResourceSupport {
 	private String city;
 
 	@JsonProperty("id")
-	private long customerId;
+	private String customerId;
 
 	public Customer() {
 	}
 
-	public Customer(long id, String firstname, String name, String email,
+	public Customer(String id, String firstname, String name, String email,
 			String street, String city) {
 		super();
 		this.customerId = id;
@@ -36,11 +36,11 @@ public class Customer extends ResourceSupport {
 		this.city = city;
 	}
 
-	public long getCustomerId() {
+	public String getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(long id) {
+	public void setCustomerId(String id) {
 		this.customerId = id;
 	}
 

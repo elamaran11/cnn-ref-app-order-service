@@ -1,5 +1,7 @@
 package com.ewolff.microservice.order.logic;
 
+import java.math.BigInteger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,7 @@ class OrderService {
 	private CatalogClient itemClient;
 
 	@Autowired
-	private OrderService(OrderRepository orderRepository,
+	public OrderService(OrderRepository orderRepository,
 			CustomerClient customerClient, CatalogClient itemClient) {
 		super();
 		this.orderRepository = orderRepository;
@@ -32,7 +34,7 @@ class OrderService {
 		return orderRepository.save(order);
 	}
 
-	public double getPrice(long orderId) {
+	public double getPrice(String orderId) {
 		return orderRepository.findById(orderId).get().totalPrice(itemClient);
 	}
 

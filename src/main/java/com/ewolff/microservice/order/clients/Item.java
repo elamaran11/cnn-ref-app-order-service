@@ -14,13 +14,13 @@ public class Item extends ResourceSupport {
 	private double price;
 
 	@JsonProperty("id")
-	private long itemId;
+	private String itemId;
 
 	public Item() {
 		super();
 	}
 
-	public Item(long id, String name, double price) {
+	public Item(String id, String name, double price) {
 		super();
 		this.itemId = id;
 		this.name = name;
@@ -43,11 +43,11 @@ public class Item extends ResourceSupport {
 		this.price = price;
 	}
 
-	public long getItemId() {
+	public String getItemId() {
 		return itemId;
 	}
 
-	public void setItemId(long id) {
+	public void setItemId(String id) {
 		this.itemId = id;
 	}
 

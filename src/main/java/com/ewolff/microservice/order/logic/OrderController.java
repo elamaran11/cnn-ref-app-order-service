@@ -1,19 +1,21 @@
 package com.ewolff.microservice.order.logic;
 
-import java.util.Collection;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.ewolff.microservice.order.clients.CatalogClient;
 import com.ewolff.microservice.order.clients.Customer;
 import com.ewolff.microservice.order.clients.CustomerClient;
 import com.ewolff.microservice.order.clients.Item;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.MediaTypes;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Collection;
 
 @Controller
 class OrderController {
@@ -26,7 +28,7 @@ class OrderController {
 	private CatalogClient catalogClient;
 
 	@Autowired
-	private OrderController(OrderService orderService,
+	public OrderController(OrderService orderService,
 			OrderRepository orderRepository, CustomerClient customerClient,
 			CatalogClient catalogClient) {
 		super();
@@ -64,7 +66,7 @@ class OrderController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ModelAndView get(@PathVariable("id") long id) {
+	public ModelAndView get(@PathVariable("id") String id) {
 		return new ModelAndView("order", "order", orderRepository.findById(id).get());
 	}
 
@@ -75,7 +77,7 @@ class OrderController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ModelAndView post(@PathVariable("id") long id) {
+	public ModelAndView post(@PathVariable("id") String id) {
 		orderRepository.deleteById(id);
 
 		return new ModelAndView("success");

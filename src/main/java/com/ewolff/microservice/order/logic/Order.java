@@ -1,5 +1,6 @@
 package com.ewolff.microservice.order.logic;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +23,9 @@ class Order {
 
 	@Id
 	@GeneratedValue
-	private long id;
+	private String id;
 
-	private long customerId;
+	private String customerId;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<OrderLine> orderLine;
@@ -34,19 +35,19 @@ class Order {
 		orderLine = new ArrayList<OrderLine>();
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public long getCustomerId() {
+	public String getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(long customerId) {
+	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
 
@@ -54,7 +55,7 @@ class Order {
 		return orderLine;
 	}
 
-	public Order(long customerId) {
+	public Order(String customerId) {
 		super();
 		this.customerId = customerId;
 		this.orderLine = new ArrayList<OrderLine>();
@@ -64,7 +65,7 @@ class Order {
 		this.orderLine = orderLine;
 	}
 
-	public void addLine(int count, long itemId) {
+	public void addLine(int count, String itemId) {
 		this.orderLine.add(new OrderLine(count, itemId));
 	}
 
@@ -78,7 +79,7 @@ class Order {
 				.reduce(0.0, (d1, d2) -> d1 + d2);
 	}
 
-	public void setCustomer(long customerId) {
+	public void setCustomer(String customerId) {
 		this.customerId = customerId;
 	}
 

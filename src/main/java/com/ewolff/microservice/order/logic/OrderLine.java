@@ -11,28 +11,30 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Entity
 public class OrderLine {
+	
+	@Id
+	@GeneratedValue
+	private String id;
+
 
 	@Column(name = "F_COUNT")
 	private int count;
 
-	private long itemId;
+	private String itemId;
 
-	@Id
-	@GeneratedValue
-	private long id;
-
+	
 	public void setCount(int count) {
 		this.count = count;
 	}
 
-	public void setItemId(long item) {
+	public void setItemId(String item) {
 		this.itemId = item;
 	}
 
 	public OrderLine() {
 	}
 
-	public OrderLine(int count, long item) {
+	public OrderLine(int count, String item) {
 		this.count = count;
 		this.itemId = item;
 	}
@@ -41,7 +43,7 @@ public class OrderLine {
 		return count;
 	}
 
-	public long getItemId() {
+	public String getItemId() {
 		return itemId;
 	}
 
