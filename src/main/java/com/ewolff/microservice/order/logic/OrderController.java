@@ -4,6 +4,8 @@ import com.ewolff.microservice.order.clients.CatalogClient;
 import com.ewolff.microservice.order.clients.Customer;
 import com.ewolff.microservice.order.clients.CustomerClient;
 import com.ewolff.microservice.order.clients.Item;
+import co.elastic.apm.api.CaptureSpan;
+import co.elastic.apm.api.CaptureTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.MediaType;
@@ -29,8 +31,8 @@ class OrderController {
 
 	@Autowired
 	public OrderController(OrderService orderService,
-			OrderRepository orderRepository, CustomerClient customerClient,
-			CatalogClient catalogClient) {
+						   OrderRepository orderRepository, CustomerClient customerClient,
+						   CatalogClient catalogClient) {
 		super();
 		this.orderRepository = orderRepository;
 		this.customerClient = customerClient;
@@ -49,6 +51,7 @@ class OrderController {
 	}
 
 	@RequestMapping("/")
+	@CaptureTransaction(type = "Task", value = "OrderList")
 	public ModelAndView orderList() {
 		return new ModelAndView("orderlist", "orders",
 				orderRepository.findAll());
@@ -60,23 +63,27 @@ class OrderController {
 	}
 
 	@RequestMapping(value = "/line", method = RequestMethod.POST)
+	@CaptureTransaction(type = "Task", value = "OrderAdd")
 	public ModelAndView addLine(Order order) {
 		order.addLine(0, catalogClient.findAll().iterator().next().getItemId());
 		return new ModelAndView("orderForm", "order", order);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@CaptureSpan("GetOperation")
 	public ModelAndView get(@PathVariable("id") String id) {
 		return new ModelAndView("order", "order", orderRepository.findById(id).get());
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
+	@CaptureTransaction(type = "Task", value = "OrderFullAdd")
 	public ModelAndView post(Order order) {
 		order = orderService.order(order);
 		return new ModelAndView("success");
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@CaptureSpan("DeleteOperation")
 	public ModelAndView post(@PathVariable("id") String id) {
 		orderRepository.deleteById(id);
 
