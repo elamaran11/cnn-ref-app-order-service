@@ -12,4 +12,3 @@ options:
   env:
 #    - 'APP_NAME=order-service'
 #    - 'PROJECT_ID=terraform-demo-236519'
-#    - 'TAG=1'
