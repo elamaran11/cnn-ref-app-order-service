@@ -4,5 +4,5 @@ steps:
     args: ['package']
 options:
   env:
-#    - 'APP_NAME=order-service'
+#    - '_APP_NAME=order-service'
 #    - 'PROJECT_ID=terraform-demo-236519'
