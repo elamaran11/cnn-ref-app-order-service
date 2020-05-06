@@ -6,12 +6,15 @@
 	<title>Order : View all</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script>
-		const url = 'http://localhost:50051/payment';
+		var url = '';
 		const data = {
 			cardNo:'3246',
 			date:'3245'
-		}
-
+		};
+		$.get('/order/paymenturl','',
+				function(data,status){
+					url = data;
+		})
 		$(document).ready(function(){
 			$("#submitPayment").click(function(){
 				$.get(url,data,
@@ -19,8 +22,7 @@
 							$("#paymentConfirmation").html('Payment submitted successfully and confirmation number is ' + data)
 						});
 			});
-		});
-
+		})
 		function showPayment() {
 			var x = document.getElementById("paymentDetails");
 			if (x.style.display === "none") {
@@ -28,12 +30,9 @@
 			} else {
 				x.style.display = "none";
 			}
-			$("#paymentConfirmation").html('');
-
+			$("#paymentConfirmation").html('')
 		}
-
 	</script>
-
 </head>
 <body>
 <h1 layout:fragment="header">Order : View all</h1>
@@ -58,26 +57,26 @@
 				Name
 			</td>
 			<td th:text="${order.totalPrice(@catalogClient)}">42.0</td>
-
+			​
 			<td><a href="order/1" th:href="${order.id}"
 				   th:text="Edit">1</a>
 			</td>
-
-
+			​
+			​
 			<td>
 				<a href="javascript:showPayment()">Payment</a>
 			</td>
 			<td><form th:action="'/order/'+${order.id}" th:method="delete">
 				<input type="submit" value="delete" class="btn btn-link" />
 			</form></td>
-
+			​
 		</tr>
 		</tbody>
 	</table>
-
-
+	​
+	​
 	<div class="row" id="paymentDetails" style="display:none">
-
+		​
 		<table>
 			<tr>
 				<div>
@@ -135,17 +134,17 @@
 			</tr>
 		</table>
 	</div>
-	
 
-
-
-<div class="row">
-	<div class="col-md-4">
-		<a href="form.html">Add Order</a>
+	​
+	​
+	​
+	<div class="row">
+		<div class="col-md-4">
+			<a href="form.html">Add Order</a>
+		</div>
 	</div>
 </div>
-</div>
-
-
+​
+​
 </body>
 </html>
